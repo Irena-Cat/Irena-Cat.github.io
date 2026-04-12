@@ -113,6 +113,123 @@ footer {
     </div>
 </section>
 
+
+<style>
+.gallery {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.gallery img {
+  width: 250px;
+  height: 250px;
+  object-fit: cover;
+  border-radius: 12px;
+  transition: transform 0.3s;
+}
+
+.gallery img:hover {
+  transform: scale(1.05);
+}
+</style>
+
+<h2>Unsere Momente ❤️</h2>
+
+<div class="gallery">
+  <img src="Bilder/1.jpeg">
+  <img src="Bilder/2.jpeg">
+  <img src="Bilder/3.jpeg">
+</div>
+
+
+
+<style>
+body {
+  font-family: 'Georgia', serif;
+  background: #faf7f2;
+  margin: 0;
+  text-align: center;
+}
+
+h2 {
+  margin-top: 50px;
+  font-size: 32px;
+}
+
+.wishlist {
+  max-width: 700px;
+  margin: 40px auto;
+  display: grid;
+  gap: 20px;
+}
+
+.item {
+  background: white;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+}
+
+.item h3 {
+  margin-bottom: 10px;
+}
+
+.icon {
+  font-size: 30px;
+  margin-bottom: 10px;
+}
+</style>
+
+<h2>Unsere Wunschliste 🎁</h2>
+
+<div class="wishlist">
+
+  <div class="item">
+    <div class="icon">🚿🧺</div>
+    <h3>Tumbler</h3>
+    <p>Für keine eingegangene Wäsche mehr</p>
+  </div>
+
+  <div class="item">
+    <div class="icon">🌴✈️</div>
+    <h3>Anteil an die Flitterwochen</h3>
+    <p>Ein Beitrag zu unserer Traumreise</p>
+  </div>
+
+  <div class="item">
+    <div class="icon">🚩</div>
+    <h3>Fahnenstange ca. 9m</h3>
+    <p>Für den Patriotismus</p>
+  </div>
+
+  <div class="item">
+    <div class="icon">🚲</div>
+    <h3>Zwei Velos</h3>
+    <p>Damit wir zu zweit von Beiz zu Beiz radeln können</p>
+  </div>
+
+<div class="item">
+    <div class="icon">🏡📮</div>
+    <h3>Briefkasten</h3>
+    <p>Für den besten ersten Eindruck</p>
+  </div>
+
+<div class="item">
+    <div class="icon">🧦🦶</div>
+    <h3>Happy Socks (ja Socken)</h3>
+    <p>Weil Happy-Sein das Wichtigste ist</p>
+  </div>
+</div>
+
+    
 <section>
     <h2>📍 Location</h2>
     <iframe 
@@ -147,8 +264,74 @@ setInterval(() => {
         `${d} Tage ${h} Std ${m} Min ${s} Sek`;
 }, 1000);
 
-
 </script>
 
+
+
+
+
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+  import { getFirestore, collection, getDocs, doc, updateDoc } 
+    from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+  const firebaseConfig = {
+  apiKey: "AIzaSyAwagugI0D2BIVJasjqa-tjQ6zYutI6PhQ",
+  authDomain: "hochzeit-wunschliste.firebaseapp.com",
+  projectId: "hochzeit-wunschliste",
+  storageBucket: "hochzeit-wunschliste.firebasestorage.app",
+  messagingSenderId: "841439725981",
+  appId: "1:841439725981:web:7dfa85f59f6277d2e98774"
+
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+
+  async function render() {
+    const list = document.getElementById("list");
+    list.innerHTML = "";
+
+    const snapshot = await getDocs(collection(db, "wishes"));
+
+    snapshot.forEach((docSnap) => {
+      const w = docSnap.data();
+
+      const div = document.createElement("div");
+      div.className = "item";
+
+      div.innerHTML = `
+        <h3>${w.name}</h3>
+        <p>${w.desc}</p>
+        <p>${w.reserved ? "Reserviert von " + w.by : "Noch verfügbar"}</p>
+        ${!w.reserved ? `<button onclick="reserve('${docSnap.id}')">Reservieren</button>` : ""}
+      `;
+
+      list.appendChild(div);
+    });
+  }
+
+  async function reserve(id) {
+    const name = prompt("Dein Name:");
+    if (!name) return;
+
+    await updateDoc(doc(db, "wishes", id), {
+      reserved: true,
+      by: name
+    });
+
+ render();
+  }
+
+  window.reserve = reserve;
+
+  render();
+</script>
+
+
+
+
+    
 </body>
 </html>
