@@ -167,7 +167,7 @@ h2 {
 
 .item {
   background: white;
-  padding: 20px;
+  padding: 50px;
   border-radius: 15px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.08);
   transition: transform 0.2s, box-shadow 0.2s;
@@ -196,40 +196,120 @@ h2 {
     <div class="icon">🚿🧺</div>
     <h3>Tumbler</h3>
     <p>Für keine eingegangene Wäsche mehr</p>
+    <form class="eintragenForm">
+    <input type="text" placeholder="Dein Name" required>
+    <input type="number" placeholder="Betrag (CHF)" min="0" required>
+    <button type="submit">Eintragen</button>
+  </form>
   </div>
 
   <div class="item">
     <div class="icon">🌴✈️</div>
     <h3>Anteil an die Flitterwochen</h3>
     <p>Ein Beitrag zu unserer Traumreise</p>
+    <form class="eintragenForm">
+    <input type="text" placeholder="Dein Name" required>
+    <input type="number" placeholder="Betrag (CHF)" min="0" required>
+    <button type="submit">Eintragen</button>
+  </form>
   </div>
 
   <div class="item">
     <div class="icon">🚩</div>
     <h3>Fahnenstange ca. 9m</h3>
     <p>Für den Patriotismus</p>
+    <form class="eintragenForm">
+    <input type="text" placeholder="Dein Name" required>
+    <input type="number" placeholder="Betrag (CHF)" min="0" required>
+    <button type="submit">Eintragen</button>
+  </form>
   </div>
 
   <div class="item">
     <div class="icon">🚲</div>
     <h3>Zwei Velos</h3>
     <p>Damit wir zu zweit von Beiz zu Beiz radeln können</p>
+    <form class="eintragenForm">
+    <input type="text" placeholder="Dein Name" required>
+    <input type="number" placeholder="Betrag (CHF)" min="0" required>
+    <button type="submit">Eintragen</button>
+  </form>
   </div>
 
 <div class="item">
     <div class="icon">🏡📮</div>
     <h3>Briefkasten</h3>
     <p>Für den besten ersten Eindruck</p>
+    <form class="eintragenForm">
+    <input type="text" placeholder="Dein Name" required>
+    <input type="number" placeholder="Betrag (CHF)" min="0" required>
+    <button type="submit">Eintragen</button>
+  </form>
   </div>
 
 <div class="item">
     <div class="icon">🧦🦶</div>
     <h3>Happy Socks (ja Socken)</h3>
     <p>Weil Happy-Sein das Wichtigste ist</p>
+    <form class="eintragenForm">
+    <input type="text" placeholder="Dein Name" required>
+    <input type="number" placeholder="Betrag (CHF)" min="0" required>
+    <button type="submit">Eintragen</button>
+  </form>
   </div>
 </div>
 
-    
+
+<script>
+document.querySelectorAll('.eintragenForm').forEach(form => {
+  form.addEventListener('submit', function(event) {
+    event.preventDefault();
+ 
+    const nameInput = form.querySelector('input[type="text"]');
+    const betragInput = form.querySelector('input[type="number"]');
+ 
+    const name = nameInput.value.trim();
+    const betrag = betragInput.value;
+ 
+    if (name && betrag) {
+      const ul = form.previousElementSibling; // Die <ul> mit den Teilnehmern
+      const li = document.createElement('li');
+      li.textContent = `${name} möchte CHF${betrag} beitragen`;
+      ul.appendChild(li);
+ 
+      // Speicherung im localStorage
+      const geschenkDiv = form.closest('.geschenk');
+      const geschenkId = geschenkDiv.dataset.id;
+ 
+      const gespeicherteListe = JSON.parse(localStorage.getItem('geschenke')) || {};
+      if (!gespeicherteListe[geschenkId]) gespeicherteListe[geschenkId] = [];
+      gespeicherteListe[geschenkId].push({ name, betrag });
+      localStorage.setItem('geschenke', JSON.stringify(gespeicherteListe));
+ 
+      form.reset();
+    }
+  });
+});
+ 
+// Beim Laden der Seite gespeicherte Teilnehmer anzeigen
+window.onload = function() {
+  const gespeicherteListe = JSON.parse(localStorage.getItem('geschenke')) || {};
+  for (const [id, eintraege] of Object.entries(gespeicherteListe)) {
+    const geschenkDiv = document.querySelector(`.geschenk[data-id="${id}"]`);
+    if (geschenkDiv) {
+      const ul = geschenkDiv.querySelector('.teilnehmer');
+      eintraege.forEach(e => {
+        const li = document.createElement('li');
+        li.textContent = `${e.name} möchte CHF${e.betrag} beitragen`;
+        ul.appendChild(li);
+      });
+    }
+  }
+};
+</script>
+
+
+  
 <section>
     <h2>📍 Location</h2>
     <iframe 
