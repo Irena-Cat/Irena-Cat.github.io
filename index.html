@@ -1,344 +1,309 @@
+
 <!DOCTYPE html>
 <html lang="de">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Unsere Hochzeit</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<style>
-body {
-    margin: 0;
-    font-family: 'Segoe UI', sans-serif;
-    background: #fffaf7;
-    color: #333;
-    text-align: center;
-}
+  <title>Danke von Herzen</title>
 
-header {
-    background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
-    url('https://images.unsplash.com/photo-1529636798458-92182e662485');
-    background-size: cover;
-    color: white;
-    padding: 100px 20px;
-}
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@400;500;600&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
 
-h1 {
-    font-size: 3em;
-    margin: 0;
-}
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-section {
-    padding: 50px 20px;
-}
+    html {
+      scroll-behavior: smooth;
+    }
 
-.countdown {
-    font-size: 2em;
-    margin-top: 20px;
-}
+    body {
+      background: #faf7f2;
+      color: #51453f;
+      font-family: 'Playfair Display', serif;
+      text-align: center;
+    }
 
-.schedule {
-    max-width: 600px;
-    margin: auto;
-}
+    /* TITELBILD */
+    .hero {
+      min-height: 90vh;
+      min-height: 90svh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 50px 24px;
+      position: relative;
+      color: white;
+      background:
+        linear-gradient(
+          rgba(25, 22, 20, 0.40),
+          rgba(25, 22, 20, 0.52)
+        ),
+        url('bilder/hochzeit-hero.jpg') center 45% / cover no-repeat;
+    }
 
-.event {
-    background: white;
-    margin: 10px 0;
-    padding: 15px;
-    border-radius: 10px;
-    box-shadow: 0 3px 8px rgba(0,0,0,0.1);
-}
+    .hero h1 {
+      font-family: 'Great Vibes', cursive;
+      font-size: clamp(6rem, 17vw, 12rem);
+      font-weight: 400;
+      line-height: 1.2;
+      text-shadow: 0 3px 25px rgba(0,0,0,0.15);
+    }
 
-.gallery {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 10px;
-}
+    .heart {
+      font-size: 25px;
+      margin: 10px 0 24px;
+    }
 
-.gallery img {
-    width: 100%;
-    border-radius: 10px;
-}
+    .hero p {
+      max-width: 650px;
+      font-size: clamp(1rem, 2.5vw, 1.35rem);
+      line-height: 1.9;
+      font-weight: 400;
+    }
 
-form {
-    max-width: 400px;
-    margin: auto;
-    display: flex;
-    flex-direction: column;
-}
+    .signature {
+      font-family: 'Great Vibes', cursive;
+      font-size: 2.5rem !important;
+      margin-top: 24px;
+    }
 
-input, select, textarea {
-    margin: 10px 0;
-    padding: 10px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-}
+    /* FOTO-BEREICH */
+    .gallery-section {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 80px 24px 35px;
+    }
 
-button {
-    padding: 12px;
-    border: none;
-    background: #e8a87c;
-    color: white;
-    font-size: 1em;
-    border-radius: 5px;
-    cursor: pointer;
-}
+    .section-title {
+      font-family: 'Great Vibes', cursive;
+      font-size: clamp(3rem, 7vw, 5rem);
+      font-weight: 400;
+      margin-bottom: 12px;
+    }
 
-button:hover {
-    background: #d98c5f;
-}
+    .intro {
+      max-width: 680px;
+      margin: 0 auto 45px;
+      font-size: 1.1rem;
+      line-height: 1.9;
+      color: #786b62;
+    }
 
-footer {
-    background: #f3d5c0;
-    padding: 20px;
-}
-</style>
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 22px;
+      align-items: center;
+    }
+
+    .photo {
+      background: white;
+      padding: 10px;
+      box-shadow: 0 8px 28px rgba(75, 55, 40, 0.12);
+      transition: transform 0.3s ease;
+    }
+
+    .photo:nth-child(odd) {
+      transform: rotate(-2deg);
+    }
+
+    .photo:nth-child(even) {
+      transform: rotate(2deg);
+    }
+
+    .photo:hover {
+      transform: rotate(0deg) translateY(-5px);
+    }
+
+    .photo img {
+      display: block;
+      width: 100%;
+      aspect-ratio: 3 / 4;
+      object-fit: cover;
+    }
+
+    /* DANKESNACHRICHT */
+    .message {
+      padding: 75px 24px 95px;
+      max-width: 760px;
+      margin: auto;
+    }
+
+    .message p {
+      font-size: 1.15rem;
+      line-height: 2;
+      color: #786b62;
+    }
+
+    .message .names {
+      font-family: 'Great Vibes', cursive;
+      font-size: 3rem;
+      margin-top: 28px;
+      color: #81736b;
+    }
+
+    footer {
+      padding: 25px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 2px;
+      color: #a39589;
+    }
+
+    /* DARSTELLUNG AUF DEM HANDY */
+    @media (max-width: 650px) {
+      .hero {
+        min-height: 80vh;
+        min-height: 80svh;
+        padding: 35px 20px;
+      }
+
+      .gallery-section {
+        padding: 55px 16px 20px;
+      }
+
+      .gallery {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 14px;
+      }
+
+      .photo {
+        padding: 6px;
+      }
+
+      .photo:nth-child(3) {
+        grid-column: 1 / -1;
+        width: 72%;
+        justify-self: center;
+      }
+
+      .message {
+        padding: 55px 22px 70px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      .photo {
+        transition: none;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-<header>
-    <h1>Jessica & Emanuel 💕</h1>
-    <p>Wir heiraten am 10. Oktober 2026</p>
-    <div class="countdown" id="countdown"></div>
-</header>
+  <!-- TITELBILD: Euer grosses Hochzeitsfoto -->
+  <header class="hero">
+    <h1>Danke</h1>
 
-<section>
-    <h2>📅 Ablauf</h2>
-    <div class="schedule">
-        <div class="event"><strong>10:30</strong> – Trauung 💒</div>
-        <div class="event"><strong>12:00</strong> – Apéro 🥂</div>
-        <div class="event"><strong>18:00</strong> – Dinner 🍽️</div>
-        <div class="event"><strong>20:00</strong> – Party 🎉</div>
-    </div>
-</section>
+    <div class="heart">♡</div>
 
+    <p>
+      Wir möchten uns von Herzen bei euch bedanken,
+      dass ihr unseren besonderen Tag mit uns gefeiert und unvergesslich gemacht habt.
+    </p>
 
-<style>
-.gallery {
-  display: flex;
-  gap: 15px;
-  flex-wrap: wrap;
-  justify-content: center;
-}
+    <p class="signature">
+      Es war einfach wunderbar!
+    </p>
+  </header>
 
-.gallery img {
-  width: 250px;
-  height: 250px;
-  object-fit: cover;
-  border-radius: 12px;
-  transition: transform 0.3s;
-}
+  <!-- EURE HOCHZEITSFOTOS -->
+  <main>
+    <section class="gallery-section">
+      <h2 class="section-title">Unvergessliche Momente</h2>
 
-.gallery img:hover {
-  transform: scale(1.05);
-}
-</style>
+      <p class="intro">
+        Dank euch ist unsere Hochzeit zu dem geworden,
+        was sie war – ein wunderschöner Tag voller Liebe,
+        Freude und Erinnerungen, die für immer bleiben.
+      </p>
 
-<h2>Unsere Momente ❤️</h2>
+      <div class="gallery">
 
-<div class="gallery">
-  <img src="1.jpeg">
-  <img src="2.jpeg">
-  <img src="3.jpeg">
-</div>
+        <div class="photo">
+          <img
+            src="bilder/hochzeit-1.jpg"
+            alt="Unsere Hochzeitstorte"
+            loading="lazy">
+        </div>
 
+        <div class="photo">
+          <img
+            src="bilder/hochzeit-2.jpg"
+            alt="Ein besonderer Moment unserer Hochzeit"
+            loading="lazy">
+        </div>
 
+        <div class="photo">
+          <img
+            src="bilder/hochzeit-3.jpg"
+            alt="Unsere Eheringe"
+            loading="lazy">
+        </div>
 
-<style>
-body {
-  font-family: 'Georgia', serif;
-  background: #faf7f2;
-  margin: 0;
-  text-align: center;
-}
+        <div class="photo">
+          <img
+            src="bilder/hochzeit-4.jpg"
+            alt="Erinnerung an unseren Hochzeitstag"
+            loading="lazy">
+        </div>
 
-h2 {
-  margin-top: 50px;
-  font-size: 32px;
-}
+        <div class="photo">
+          <img
+            src="bilder/hochzeit-5.jpg"
+            alt="Ein gemeinsamer Moment"
+            loading="lazy">
+        </div>
 
-.wishlist {
-  max-width: 700px;
-  margin: 40px auto;
-  display: grid;
-  gap: 20px;
-}
+        <div class="photo">
+          <img
+            src="bilder/hochzeit-6.jpg"
+            alt="Unser schönster Tag"
+            loading="lazy">
+        </div>
 
-.item {
-  background: white;
-  padding: 50px;
-  border-radius: 15px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-  transition: transform 0.2s, box-shadow 0.2s;
-}
+      </div>
+    </section>
 
-.item:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 6px 18px rgba(0,0,0,0.12);
-}
+    <!-- PERSÖNLICHER ABSCHLUSS -->
+    <section class="message">
+      <div class="heart">♡</div>
 
-.item h3 {
-  margin-bottom: 10px;
-}
+      <p>
+        Ob mit lieben Worten, einer Umarmung,
+        einem Geschenk oder einfach dadurch,
+        dass ihr da wart – wir haben jede einzelne
+        Geste geschätzt.
+      </p>
 
-.icon {
-  font-size: 30px;
-  margin-bottom: 10px;
-}
-</style>
+      <p style="margin-top: 20px;">
+        Danke, dass ihr Teil unserer Geschichte seid.
+      </p>
 
-    
-<h2>Unsere Wunschliste 🎁</h2>
+      <p class="names">
+        Jessica &amp; Emanuel
+      </p>
+    </section>
+  </main>
 
-<a href="https://nuudel.digitalcourage.de/FvljPL9rwcpxYMaa" target="_blank">Fülle die Wunschliste hier aus!</a>
+  <footer>
+    MIT LIEBE · FÜR IMMER IN ERINNERUNG
+  </footer>
 
-    
-<div class="wishlist">
-
-  <div class="item">
-    <div class="icon">🚿🧺</div>
-    <h3>Tumbler</h3>
-    <p>Für keine eingegangene Wäsche mehr</p>
-  </div>
-
-  <div class="item">
-    <div class="icon">🌴✈️</div>
-    <h3>Anteil an die Flitterwochen</h3>
-    <p>Ein Beitrag zu unserer Traumreise</p>
-  </div>
-
-  <div class="item">
-    <div class="icon">🚩</div>
-    <h3>Fahnenstange ca. 9m</h3>
-    <p>Für den Patriotismus</p>
-  </div>
-
-  <div class="item">
-    <div class="icon">🚲</div>
-    <h3>Zwei Velos</h3>
-    <p>Damit wir zu zweit von Beiz zu Beiz radeln können</p>
-  </div>
-
-<div class="item">
-    <div class="icon">🏡📮</div>
-    <h3>Briefkasten</h3>
-    <p>Für den besten ersten Eindruck</p>
-  </div>
-
-<div class="item">
-    <div class="icon">🧦🦶</div>
-    <h3>Happy Socks (ja Socken)</h3>
-    <p>Weil Happy-Sein das Wichtigste ist</p>
-  </div>
-</div>
-
-
-
-  
-<section>
-    <h2>📍 Location</h2>
-    <iframe 
-        src="https://www.google.com/maps?q=Gächlingen&output=embed"
-        width="100%" height="300" style="border:0; border-radius:10px;">
-    </iframe>
-</section>
-
-<footer>
-    <p>Wir freuen uns auf euch ❤️</p>
-</footer>
-
-<!-- 🎵 Hintergrundmusik -->
-<audio autoplay loop>
-    <source src="https://www.bensound.com/bensound-music/bensound-romantic.mp3" type="audio/mp3">
-</audio>
-
-<script>
-// Countdown
-const weddingDate = new Date("October 10, 2026 10:30:00").getTime();
-
-setInterval(() => {
-    const now = new Date().getTime();
-    const distance = weddingDate - now;
-
-    const d = Math.floor(distance / (1000*60*60*24));
-    const h = Math.floor((distance % (1000*60*60*24)) / (1000*60*60));
-    const m = Math.floor((distance % (1000*60*60)) / (1000*60));
-    const s = Math.floor((distance % (1000*60)) / 1000);
-
-    document.getElementById("countdown").innerHTML =
-        `${d} Tage ${h} Std ${m} Min ${s} Sek`;
-}, 1000);
-
-</script>
-
-
-
-
-    
-
-
-<script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-  import { getFirestore, collection, getDocs, doc, updateDoc } 
-    from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
-
-  const firebaseConfig = {
-  apiKey: "AIzaSyAwagugI0D2BIVJasjqa-tjQ6zYutI6PhQ",
-  authDomain: "hochzeit-wunschliste.firebaseapp.com",
-  projectId: "hochzeit-wunschliste",
-  storageBucket: "hochzeit-wunschliste.firebasestorage.app",
-  messagingSenderId: "841439725981",
-  appId: "1:841439725981:web:7dfa85f59f6277d2e98774"
-
-  };
-
-  const app = initializeApp(firebaseConfig);
-  const db = getFirestore(app);
-
-  async function render() {
-    const list = document.getElementById("list");
-    list.innerHTML = "";
-
-    const snapshot = await getDocs(collection(db, "wishes"));
-
-    snapshot.forEach((docSnap) => {
-      const w = docSnap.data();
-
-      const div = document.createElement("div");
-      div.className = "item";
-
-      div.innerHTML = `
-        <h3>${w.name}</h3>
-        <p>${w.desc}</p>
-        <p>${w.reserved ? "Reserviert von " + w.by : "Noch verfügbar"}</p>
-        ${!w.reserved ? `<button onclick="reserve('${docSnap.id}')">Reservieren</button>` : ""}
-      `;
-
-      list.appendChild(div);
-    });
-  }
-
-  async function reserve(id) {
-    const name = prompt("Dein Name:");
-    if (!name) return;
-
-    await updateDoc(doc(db, "wishes", id), {
-      reserved: true,
-      by: name
-    });
-
- render();
-  }
-
-  window.reserve = reserve;
-
-  render();
-</script>
-
-
-
-
-    
 </body>
 </html>
+
+
+
